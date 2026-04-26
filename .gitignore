@@ -1,0 +1,21 @@
+# Environment variables
+.env
+
+# Credentials
+credentials.json
+
+# Generated directories
+Downloaded_PDFs/
+Extracted_Text/
+Generated_Audio/
+pdfs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS files
+.DS_Store
+Thumbs.db
