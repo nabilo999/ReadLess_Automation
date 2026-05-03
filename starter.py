@@ -7,6 +7,8 @@ from pypdf import PdfReader
 from gtts import gTTS
 import io
 from dotenv import load_dotenv
+import smtplib
+from email.message import EmailMessage
 
 load_dotenv()
 
@@ -16,6 +18,7 @@ FOLDER_ID = os.getenv('FOLDER_ID', '1e4VSWDCraG60ZWDwzFm-Rq9Twvx6CnRs')
 DOWNLOAD_DIR = os.getenv('DOWNLOAD_DIR', 'c:\\Users\\nabil\\Desktop\\automation_final proj\\Downloaded_PDFs')
 TEXT_DIR = os.getenv('TEXT_DIR', 'c:\\Users\\nabil\\Desktop\\automation_final proj\\Extracted_Text')
 AUDIO_DIR = os.getenv('AUDIO_DIR', 'c:\\Users\\nabil\\Desktop\\automation_final proj\\Generated_Audio')
+Email_Password = os.environ.get("EMAIL_PASS")
 
 # connect to Google Drive API using service account credentials
 def get_drive_service():
@@ -103,3 +106,26 @@ def fetch_pdfs():
 
 if __name__ == '__main__':
     fetch_pdfs()
+
+
+def send_email(subject, body):
+    # credentials
+    msg_from = "nabilosaido47@gmail.com"
+    password = Email_Password
+
+    # Create the email 
+    msg = EmailMessage()
+    msg.set_content(body)
+    msg['Subject'] = subject
+    msg['From'] = msg_from
+    msg['To'] = "nabilosaido47@gmail.com"
+
+    try:
+        # Connect to Gmail's SMTP and send email
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(msg_from, password)
+            smtp.send_message(msg)
+            print("Email sent successfully!")
+
+    except Exception as e:
+        print(f"Error: {e}")
