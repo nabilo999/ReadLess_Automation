@@ -66,7 +66,7 @@ python main.py
 
 ---
 
-# Important File Naming
+# Important File Naming  
 
 PDF files in Google Drive must be named using the due date of the reading.
 
